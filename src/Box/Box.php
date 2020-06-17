@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Box;
+
+class Box
+{
+    private static $instances = [];
+
+    public static function getInstance()
+    {
+        $subclass = static::class;
+
+        if (!isset(self::$instances[$subclass])) {
+            self::$instances[$subclass] = new static();
+        }
+        return self::$instances[$subclass];
+    }
+
+    protected function __construct()
+    {
+    }
+
+    private function __clone()
+    {
+    }
+
+    private function __wakeup()
+    {
+    }
+}
