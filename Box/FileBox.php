@@ -23,7 +23,12 @@ class FileBox extends AbstractBox
      */
     public function save()
     {
-        $preparedData = json_encode($this->storage);
+        $fileData = file_get_contents(self::$filePath);
+        $parsedFileData = $fileData ? json_decode($fileData, true) : [];
+
+        $dataToSave = array_merge($parsedFileData, $this->getAll());
+        $preparedData = json_encode($dataToSave);
+
         file_put_contents(self::$filePath, $preparedData);
     }
 
