@@ -2,8 +2,8 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-use App\Box\DbBox;
-use App\Box\FileBox;
+use Box\DbBox;
+use Box\FileBox;
 
 $testData = [
     'key1' => 'content1',
@@ -35,8 +35,6 @@ if ($testData == $fileData) {
     echo "Smth went wrong...\n\n";
 }
 
-
-
 /* Test DbBox class */
 $db = DbBox::getInstance();
 $db2 = DbBox::getInstance();
@@ -58,3 +56,9 @@ if ($dbData == $testData) {
 } else {
     echo "Smth went wrong...\n\n";
 }
+
+if ($db === $file) {
+    echo "Db and file are equal..";
+}
+
+var_dump($db instanceof FileBox);

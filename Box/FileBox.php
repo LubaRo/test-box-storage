@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Box;
+namespace Box;
 
 class FileBox extends AbstractBox
 {
-    private static $filePath = 'storage/data.json';
+    private static $filePath = 'data.json';
 
     public function save()
     {

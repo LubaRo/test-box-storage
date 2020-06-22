@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Box;
+namespace Box;
 
 interface BoxInterface
 {
