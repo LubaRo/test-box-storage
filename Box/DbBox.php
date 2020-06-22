@@ -2,6 +2,11 @@
 
 namespace Box;
 
+/**
+ * DbBox
+ *
+ * Allows to save and load box data from database
+ */
 class DbBox extends AbstractBox
 {
     private $dbTable = 'storage';
@@ -10,7 +15,12 @@ class DbBox extends AbstractBox
     private $dbUser  = '';
     private $dbPwd   = '';
 
-    private function prepareValuesRow()
+    /**
+     * Prepare multiple values for sql query
+     *
+     * @return string
+     */
+    private function prepareValuesRow(): string
     {
         $values = [];
         foreach ($this->storage as $key => $value) {
@@ -20,6 +30,11 @@ class DbBox extends AbstractBox
         return implode(', ', $values);
     }
 
+    /**
+     * Save box data to database
+     *
+     * @return void
+     */
     public function save()
     {
         $pdo = $this->getDbConnection();
@@ -28,6 +43,11 @@ class DbBox extends AbstractBox
         $pdo->exec("REPLACE INTO {$this->dbTable} (`key`, `value`) VALUES {$valuesRow}");
     }
 
+    /**
+     * Load data from database to box instance
+     *
+     * @return void
+     */
     public function load()
     {
         $pdo = $this->getDbConnection();
@@ -39,6 +59,11 @@ class DbBox extends AbstractBox
         }
     }
 
+    /**
+     * Establishes and returns a database connection
+     *
+     * @return \PDO
+     */
     private function getDbConnection()
     {
         $data = "mysql:dbname={$this->dbName};host={$this->dbHost}";
